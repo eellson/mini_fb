@@ -658,7 +658,7 @@ module MiniFB
                     url += '?' + options[:params].map { |k, v|  CGI.escape(k.to_s) + '=' + CGI.escape(v.to_s) }.join('&')
                 end
                 @@log.debug 'url_get=' + url if @@logging
-                resp = RestClient.get url
+                resp = RestClient::Request.execute(:url => url, :ssl_version => 'TLSv1_2', :method => 'get')
             end
 
             @@log.debug 'resp=' + resp.to_s if @@log.debug?
